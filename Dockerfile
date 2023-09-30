@@ -1,4 +1,5 @@
 FROM openjdk:11
-COPY target/*.jar /
-ENTRYPOINT ["java", "-jar","/Devops-Integration-1.0.jar"]
+WORKDIR /app
+COPY target/*.jar app.jar
+ENTRYPOINT ["java", "-jar","app.jar"]
 EXPOSE 8080
