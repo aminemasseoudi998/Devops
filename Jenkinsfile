@@ -1,7 +1,8 @@
 pipeline {
     agent any
- 
-    
+    tools {
+     maven 'Maven'    
+          }   
     stages{
         stage("git pull"){
             steps{
