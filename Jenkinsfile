@@ -1,5 +1,8 @@
 pipeline {
     agent any
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('dckr_pat_29mcpE6TEQaidinxTNa4i0IICtw')
+	}
     tools {
      maven 'Maven'    
           }   
@@ -22,24 +25,16 @@ pipeline {
                 }
                 
             }
-        stage('clean'){
-                steps{
-                sh 'mvn clean package'
-                    
-                }
-                
-            }  
-        stage('MVN TEST') {
-                steps {
-                sh 'mvn clean test'
-                    
-                }
-                
-            }  
+       
+     
         stage('build'){
+		agent {
+			label 'docker'
+			}
             steps{
                 sh 'mvn install package'
             }
+		
          }
          
    //    stage('SonarQube analysis') {
@@ -60,7 +55,10 @@ pipeline {
   //  }
         
       stage('Docker Build') {
-
+	      
+              		agent {
+			label 'docker'
+			}           
 			steps {
 				sh 'docker build -t aminemass/tpachatproject .'
 			}
@@ -68,6 +66,9 @@ pipeline {
         
        
 		stage('Docker Login') {
+			agent {
+			label 'docker'
+			}
 
 			steps {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
@@ -76,13 +77,19 @@ pipeline {
 	    
 	    
 	    	stage('Push') {
+			agent {
+			label 'docker'
+			}
 
 			steps {
-				sh 'docker push aminemasseoudi/tpachatproject:latest'
+				sh 'docker push aminemass/tpachatproject:latest'
 			}
 		}
 	    
 	        stage('Docker Compose'){
+			agent {
+			label 'docker'
+			}
             steps{
                 script{
                     sh 'docker-compose up -d'
