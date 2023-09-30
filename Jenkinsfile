@@ -2,16 +2,16 @@ pipeline {
     agent any
  
 environment {
-		DOCKERHUB_CREDENTIALS=credentials('d2019489-e71a-40bd-b1e9-8639d5298a74')
+		DOCKERHUB_CREDENTIALS=credentials('dckr_pat_29mcpE6TEQaidinxTNa4i0IICtw')
 	}
     
     stages{
         stage("git pull"){
             steps{
               
-                git branch: 'reglementBack', 
-                credentialsId: '119d27c5-ec0b-44fb-882f-0735a2890bd1', 
-                url: 'https://github.com/nesrinehm1996/magasinback.git'
+                git branch: 'main', 
+                credentialsId: 'aminetoken', 
+                url: 'https://github.com/aminemasseoudi998/Devops.git'
                     
                 }
                 
@@ -64,7 +64,7 @@ environment {
       stage('Docker Build') {
 
 			steps {
-				sh 'docker build -t aminemasseoudi/tpachatproject .'
+				sh 'docker build -t aminemass/tpachatproject .'
 			}
 		}
         
