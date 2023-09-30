@@ -1,7 +1,7 @@
 pipeline {
     agent any
 	environment {
-		DOCKERHUB_CREDENTIALS=credentials('dckr_pat_29mcpE6TEQaidinxTNa4i0IICtw')
+		DOCKERHUB_CREDENTIALS=credentials('docker_hub')
 	}
     tools {
      maven 'Maven'    
