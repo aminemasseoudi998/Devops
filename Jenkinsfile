@@ -105,6 +105,9 @@ pipeline {
             
 }
     post {
+	    agent {
+			label 'docker'
+			}
 		always {
 			sh 'docker logout'
 		}
