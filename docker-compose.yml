@@ -15,7 +15,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: aminemasseoudi/tpachatproject:latest
+    image: aminemass/tpachatproject:latest
     restart: on-failure
     ports:
       - "8089:8080"
@@ -32,12 +32,7 @@ services:
     stdin_open: true
     tty: true
     
-  app-front:
 
-    image: aminemasseoudi/crud-front:latest
-    container_name: app-front
-    ports:
-    - "4200:4200"
 
 volumes:
   db:
